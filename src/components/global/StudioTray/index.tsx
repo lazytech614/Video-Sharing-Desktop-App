@@ -1,7 +1,16 @@
-import { onStopRecording, startRecording } from "@/lib/recorder"
+import { 
+  useEffect, 
+  useRef, 
+  useState 
+} from "react"
+
+import { onStopRecording, selectSources, startRecording } from "@/lib/recorder"
 import { cn, videoRecordinTime } from "@/lib/utils"
-import { Cast, Pause, Play, Square } from "lucide-react"
-import { useEffect, useRef, useState } from "react"
+import { 
+  Cast, 
+  Play, 
+  Square 
+} from "lucide-react"
 
 const StudioTray = () => {
     const initialTime = new Date()
@@ -29,6 +38,16 @@ const StudioTray = () => {
       setCount(0)
       setOnTimer('00:00:00')
     }
+
+    useEffect(() => {
+      if(onSources && onSources.screen) {
+        selectSources(onSources, videoElement)
+      }
+
+      return () => {
+        selectSources(onSources!, videoElement)
+      }
+    }, [onSources])
 
     useEffect(() => {
       if(!recording) return 

@@ -16,10 +16,10 @@ function createWindow() {
     height: 600,
     minHeight: 600,
     minWidth: 300,
-    // frame: false,
-    // transparent: true,
-    // alwaysOnTop: true,
-    // focusable: false,
+    frame: false,
+    transparent: true,
+    alwaysOnTop: true,
+    focusable: false,
     icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
     webPreferences: {
       contextIsolation: true,
@@ -29,7 +29,7 @@ function createWindow() {
     }
   });
   studio = new BrowserWindow({
-    width: 200,
+    width: 400,
     height: 400,
     minHeight: 70,
     maxHeight: 400,
@@ -48,11 +48,11 @@ function createWindow() {
     }
   });
   floatingWebCam = new BrowserWindow({
-    width: 400,
+    width: 200,
     height: 200,
     minHeight: 70,
     maxHeight: 400,
-    minWidth: 300,
+    minWidth: 70,
     maxWidth: 400,
     frame: false,
     transparent: true,
@@ -67,9 +67,11 @@ function createWindow() {
     }
   });
   win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
-  win.setAlwaysOnTop(true);
+  win.setAlwaysOnTop(true, "screen-saver", 1);
   studio.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
   studio.setAlwaysOnTop(true, "screen-saver", 1);
+  floatingWebCam.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
+  floatingWebCam.setAlwaysOnTop(true, "screen-saver", 1);
   win.webContents.on("did-finish-load", () => {
     win == null ? void 0 : win.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
   });
