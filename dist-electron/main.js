@@ -16,10 +16,10 @@ function createWindow() {
     height: 600,
     minHeight: 600,
     minWidth: 300,
-    frame: false,
-    transparent: true,
-    alwaysOnTop: true,
-    focusable: false,
+    // frame: false,
+    // transparent: true,
+    // alwaysOnTop: true,
+    // focusable: false,
     icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
     webPreferences: {
       contextIsolation: true,
@@ -29,11 +29,11 @@ function createWindow() {
     }
   });
   studio = new BrowserWindow({
-    width: 400,
+    width: 200,
     height: 400,
     minHeight: 70,
     maxHeight: 400,
-    minWidth: 300,
+    minWidth: 100,
     maxWidth: 400,
     frame: false,
     transparent: true,

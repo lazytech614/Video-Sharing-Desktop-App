@@ -10,7 +10,7 @@ type Props = {
         subscription: {
           plan: "PRO" | "FREE"
         } | null
-        studio: {
+        studios: {
           id: string
           screen: string | null
           mic: string | null
@@ -33,14 +33,14 @@ const MediaConfig = ({ state, data }: Props) => {
   if (!state.displays?.length || !state.audioInputs?.length) {
     return (
       <div className="flex h-full w-full justify-center items-center">
-        <Loader />
+        <Loader color="#fff" />
       </div>
     )
   }
 
-  const initialScreenId = data?.studio?.screen ?? state.displays[0].id
-  const initialMicId = data?.studio?.mic ?? state.audioInputs[0].deviceId
-  const initialPreset = data?.studio?.preset ?? ("SD" as "HD" | "SD")
+  const initialScreenId = data?.studios?.screen ?? state.displays[0].id
+  const initialMicId = data?.studios?.mic ?? state.audioInputs[0].deviceId
+  const initialPreset = data?.studios?.preset ?? ("SD" as "HD" | "SD")
 
   const { register, isPending, onPreset } = useStudioSettings(
     data?.id!,
@@ -66,6 +66,7 @@ const MediaConfig = ({ state, data }: Props) => {
         <select
           {...register("screen")}
           className="outline-none cursor-pointer px-5 py-2 rounded-xl border-2 text-white border-[#575655] bg-transparent w-full"
+          defaultValue={initialScreenId}
         >
           {state.displays.map((display) => (
             <option
@@ -83,8 +84,9 @@ const MediaConfig = ({ state, data }: Props) => {
       <div className="flex gap-x-5 justify-center items-center">
         <Mic size={36} fill="#575655" color="#575655" />
         <select
-          {...register}
+          {...register("audio")}
           className="outline-none cursor-pointer px-5 py-2 rounded-xl border-2 text-white border-[#575655] bg-transparent w-full"
+          defaultValue={initialMicId}
         >
           {state.audioInputs.map((mic) => (
             <option
@@ -104,6 +106,7 @@ const MediaConfig = ({ state, data }: Props) => {
         <select
           {...register("preset")}
           className="outline-none cursor-pointer px-5 py-2 rounded-xl border-2 text-white border-[#575655] bg-transparent w-full"
+          defaultValue={initialPreset}
         >
           <option
             value="HD"

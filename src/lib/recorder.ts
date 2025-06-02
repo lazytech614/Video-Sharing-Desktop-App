@@ -14,3 +14,5 @@ export const startRecording = (onSources: {
     // __TS-ignore: we “know” that initRecorder(stream) was called first
     mediaRecorder.start(1000)
 }
+
+export const onStopRecording = () => mediaRecorder.stop()

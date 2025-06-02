@@ -13,7 +13,7 @@ const Widget = () => {
             subscription: {
                 plan: 'FREE' | 'PRO'
             } | null
-            studio: {
+            studios: {
                 id: string
                 screen: string | null
                 mic: string | null
