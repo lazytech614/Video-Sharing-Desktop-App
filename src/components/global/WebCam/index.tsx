@@ -6,8 +6,7 @@ const WebCam = () => {
     const streamWebCam = async () => {
         const stream = await navigator.mediaDevices.getUserMedia({
             video: true,
-            //TODO: make this audio true later
-            audio: false
+            audio: true
         })
         
         if(camElement.current) {
